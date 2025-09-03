@@ -25,7 +25,6 @@ public class Console {
 
     @ManyToOne
     @JoinColumn(name = "videogame_id", nullable = false)
-
     private VideoGame videogame;
 
     public Console() {
