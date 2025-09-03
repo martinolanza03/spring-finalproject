@@ -9,7 +9,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "videogiochi")
+@Table(name = "videogame")
 public class VideoGame {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
