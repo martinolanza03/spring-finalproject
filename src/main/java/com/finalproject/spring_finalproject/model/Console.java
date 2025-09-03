@@ -28,6 +28,10 @@ public class Console {
 
     private VideoGame videogame;
 
+    public Console() {
+
+    }
+
     public Console(Integer id, String name, Date releaseDate) {
         this.id = id;
         this.name = name;

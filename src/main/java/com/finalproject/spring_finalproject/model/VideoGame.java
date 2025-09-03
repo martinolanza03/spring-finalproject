@@ -21,6 +21,9 @@ public class VideoGame {
     @NotBlank(message = "The name must not be null, nor empty or blank")
     private String name;
 
+    public VideoGame() {
+    }
+
     public VideoGame(Integer id, String name, String description, String photoUrl, Integer price) {
         this.id = id;
         this.name = name;
