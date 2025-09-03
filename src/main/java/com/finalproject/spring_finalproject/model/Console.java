@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
@@ -20,6 +22,11 @@ public class Console {
     private String name;
 
     private Date releaseDate;
+
+    @ManyToOne
+    @JoinColumn(name = "videogame_id", nullable = false)
+
+    private VideoGame videogame;
 
     public Console(Integer id, String name, Date releaseDate) {
         this.id = id;
@@ -51,4 +58,11 @@ public class Console {
         this.releaseDate = releaseDate;
     }
 
+    public VideoGame getVideogame() {
+        return this.videogame;
+    }
+
+    public void setVideogame(VideoGame videogame) {
+        this.videogame = videogame;
+    }
 }

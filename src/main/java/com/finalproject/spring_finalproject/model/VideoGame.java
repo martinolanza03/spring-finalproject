@@ -1,9 +1,12 @@
 package com.finalproject.spring_finalproject.model;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -34,6 +37,9 @@ public class VideoGame {
     @Min(value = 1)
     @NotBlank(message = "The name must not be null, nor empty or blank")
     private Integer price;
+
+    @OneToMany
+    private List<Console> console;
 
     public Integer getId() {
         return this.id;
@@ -73,6 +79,14 @@ public class VideoGame {
 
     public void setPrice(Integer price) {
         this.price = price;
+    }
+
+    public List<Console> getConsole() {
+        return this.console;
+    }
+
+    public void setConsole(List<Console> console) {
+        this.console = console;
     }
 
 }
