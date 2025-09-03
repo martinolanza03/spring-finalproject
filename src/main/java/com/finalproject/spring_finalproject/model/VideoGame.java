@@ -21,6 +21,18 @@ public class VideoGame {
     @NotBlank(message = "The name must not be null, nor empty or blank")
     private String name;
 
+    @NotBlank(message = "The name must not be null, nor empty or blank")
+    private String description;
+
+    private String photoUrl;
+
+    @Min(value = 1)
+    @NotBlank(message = "The name must not be null, nor empty or blank")
+    private Integer price;
+
+    @OneToMany(mappedBy = "videogame")
+    private List<Console> consoles;
+
     public VideoGame() {
     }
 
@@ -31,18 +43,6 @@ public class VideoGame {
         this.photoUrl = photoUrl;
         this.price = price;
     }
-
-    @NotBlank(message = "The name must not be null, nor empty or blank")
-    private String description;
-
-    private String photoUrl;
-
-    @Min(value = 1)
-    @NotBlank(message = "The name must not be null, nor empty or blank")
-    private Integer price;
-
-    @OneToMany
-    private List<Console> console;
 
     public Integer getId() {
         return this.id;
@@ -84,12 +84,12 @@ public class VideoGame {
         this.price = price;
     }
 
-    public List<Console> getConsole() {
-        return this.console;
+    public List<Console> getConsoles() {
+        return this.consoles;
     }
 
-    public void setConsole(List<Console> console) {
-        this.console = console;
+    public void setConsoles(List<Console> consoles) {
+        this.consoles = consoles;
     }
 
 }
