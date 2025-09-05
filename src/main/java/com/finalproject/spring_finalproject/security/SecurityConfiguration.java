@@ -1,5 +1,7 @@
 package com.finalproject.spring_finalproject.security;
 
+import org.springframework.security.config.Customizer;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -23,14 +25,9 @@ public class SecurityConfiguration {
                 .requestMatchers("/videogame", "/videogame/**").hasAnyAuthority("USER", "ADMIN")
                 .requestMatchers("/console", "/console/**").hasAnyAuthority("USER", "ADMIN")
                 .requestMatchers("/**").permitAll())
-                .formLogin(form -> form
-                        .loginPage("/login")
-                        .defaultSuccessUrl("/")
-                        .permitAll())
-                .logout(logout -> logout
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/login?logout")
-                        .permitAll());
+                .formLogin(Customizer.withDefaults())
+                .cors(cors -> cors.disable())
+                .csrf(csrf -> csrf.disable());
         return http.build();
     }
 
