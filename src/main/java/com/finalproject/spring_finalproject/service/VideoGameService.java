@@ -40,7 +40,7 @@ public class VideoGameService {
         videoGameRepository.delete(videoGame);
     }
 
-    public void delateById(Integer Id) {
+    public void deleteById(Integer Id) {
         VideoGame videoGame = videoGameRepository.findById(Id).get();
 
         videoGameRepository.delete(videoGame);
