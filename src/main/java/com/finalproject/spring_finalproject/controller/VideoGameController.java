@@ -80,7 +80,7 @@ public class VideoGameController {
             Model model) {
         if (bidingResult.hasErrors()) {
             model.addAttribute("consoles", consoleRepository.findAll());
-            return "videogame/create";
+            return "videogame/create-or-edit";
         }
 
         videoGameService.update(formVideoGame);
