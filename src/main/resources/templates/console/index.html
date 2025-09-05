@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lista Console</title>
+</head>
+
+<body>
+    <h1>Lista delle console</h1>
+    <h2>
+        <a th:href="@{/console/create}">Crea Console</a>
+    </h2>
+
+    <table th:if="${consoles != null and !consoles.empty}">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Data di rilascio</th>
+                <th>Opzioni Console</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="console : ${consoles}" th:object="${console}">
+                <td>[[*{name}]]</td>
+                <td>[[*{releaseDate}]]</td>
+                <td>
+                    <a th:href="@{/console/{id}/edit(id=${console.id})}">Modifica console</a>
+
+                    <form action="#" th:action="@{'/console/{id}/delete'(id=${console.id})}" method="post">
+                        <button type="submit" id="submitButton">Elimina Console</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p th:if="${consoles == null or consoles.empty}" th:text="No console available"></p>
+
+</body>
+
+</html>
