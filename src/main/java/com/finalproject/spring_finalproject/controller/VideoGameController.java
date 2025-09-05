@@ -64,4 +64,26 @@ public class VideoGameController {
 
         return "redirect:/videogame";
     }
+
+    @GetMapping("/{id}/edit")
+    public String edit(@PathVariable Integer id, Model model) {
+        model.addAttribute("videogame", videoGameService.findById(id).get());
+        model.addAttribute("edit", true);
+
+        return "videogame/create-or-edit";
+    }
+
+    @PostMapping("/{id}/edit")
+    public String update(@Valid @ModelAttribute("videogame") VideoGame formVideoGame,
+            BindingResult bidingResult,
+            Model model) {
+        if (bidingResult.hasErrors()) {
+            model.addAttribute("consoles", consoleRepository.findAll());
+            return "videogame/create";
+        }
+
+        videoGameService.update(formVideoGame);
+
+        return "redirect:/videogame";
+    }
 }
