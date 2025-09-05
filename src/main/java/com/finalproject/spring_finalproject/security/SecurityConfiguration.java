@@ -4,7 +4,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
@@ -24,9 +23,14 @@ public class SecurityConfiguration {
                 .requestMatchers("/videogame", "/videogame/**").hasAnyAuthority("USER", "ADMIN")
                 .requestMatchers("/console", "/console/**").hasAnyAuthority("USER", "ADMIN")
                 .requestMatchers("/**").permitAll())
-                .formLogin(Customizer.withDefaults())
-                .cors(cors -> cors.disable())
-                .csrf(csrf -> csrf.disable());
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/")
+                        .permitAll())
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/login?logout")
+                        .permitAll());
         return http.build();
     }
 
