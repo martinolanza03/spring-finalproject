@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.finalproject.spring_finalproject.model.Console;
 import com.finalproject.spring_finalproject.repository.ConsoleRepository;
 
+@Service
 public class ConsoleService {
     @Autowired
     private ConsoleRepository consoleRepository;
