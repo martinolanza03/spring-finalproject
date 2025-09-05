@@ -31,7 +31,8 @@
 
                 <div class="mb-3">
                     <label for="price" class="form-label">Prezzo €</label>
-                    <input th:field="*{price}" class="form-control" id="title" type="number" th:errorclass="is-invalid">
+                    <input th:field="*{price}" class="form-control" id="title" type="number" th:errorclass="is-invalid"
+                        min="1">
                     <div th:if="${#fields.hasErrors('price')}" class="invalid-feedback">
                         <span th:each="error: ${#fields.errors('price')}" th:text="${error}"></span>
                     </div>
