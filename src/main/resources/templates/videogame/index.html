@@ -24,7 +24,14 @@
                 <td>[[*{name}]]</td>
                 <td>[[*{description}]]</td>
                 <td>[[*{price}]]€</td>
-                <td></td>
+                <td>
+                    <a th:href="@{/videogame/{id}(id=${videogame.id})}">Dettagli</a>
+                    <a th:href="@{/videogame/{id}/edit(id=${videogame.id})}">Modifica Videogame</a>
+
+                    <form action="#" th:action="@{'/videogame/{id}/delete'(id=${videogame.id})}" method="post">
+                        <button type="submit" id="submitButton">Elimina Videogame</button>
+                    </form>
+                </td>
             </tr>
         </tbody>
     </table>
