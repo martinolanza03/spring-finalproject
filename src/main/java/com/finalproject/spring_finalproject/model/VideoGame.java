@@ -6,10 +6,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "videogame")
@@ -26,11 +29,12 @@ public class VideoGame {
 
     private String photoUrl;
 
-    @Min(value = 1)
-    @NotBlank(message = "The name must not be null, nor empty or blank")
+    @Min(value = 1, message = "The name must not be null")
+    @NotNull
     private Integer price;
 
-    @OneToMany(mappedBy = "videogame")
+    @ManyToMany
+    @JoinTable(name = "console_videogame", joinColumns = @JoinColumn(name = "videogame_id"), inverseJoinColumns = @JoinColumn(name = "console_id"))
     private List<Console> consoles;
 
     public VideoGame() {

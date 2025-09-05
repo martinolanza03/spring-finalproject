@@ -1,13 +1,13 @@
 package com.finalproject.spring_finalproject.model;
 
 import java.sql.Date;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
@@ -23,9 +23,8 @@ public class Console {
 
     private Date releaseDate;
 
-    @ManyToOne
-    @JoinColumn(name = "videogame_id", nullable = false)
-    private VideoGame videogame;
+    @ManyToMany(mappedBy = "consoles")
+    private List<VideoGame> videogame;
 
     public Console() {
 
@@ -61,11 +60,12 @@ public class Console {
         this.releaseDate = releaseDate;
     }
 
-    public VideoGame getVideogame() {
+    public List<VideoGame> getVideogame() {
         return this.videogame;
     }
 
-    public void setVideogame(VideoGame videogame) {
+    public void setVideogame(List<VideoGame> videogame) {
         this.videogame = videogame;
     }
+
 }
