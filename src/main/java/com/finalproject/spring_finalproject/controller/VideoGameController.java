@@ -5,18 +5,27 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.finalproject.spring_finalproject.model.VideoGame;
+import com.finalproject.spring_finalproject.repository.ConsoleRepository;
 import com.finalproject.spring_finalproject.service.VideoGameService;
+
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/videogame")
 public class VideoGameController {
     @Autowired
     private VideoGameService videoGameService;
+
+    @Autowired
+    private ConsoleRepository consoleRepository;
 
     @GetMapping
     public String index(Model model) {
@@ -34,4 +43,25 @@ public class VideoGameController {
         return "videogame/show";
     }
 
+    @GetMapping("/create")
+    public String create(Model model) {
+        model.addAttribute("videogame", new VideoGame());
+        model.addAttribute("consoles", consoleRepository.findAll());
+
+        return "videogame/create-or-edit";
+    }
+
+    @PostMapping("/create")
+    public String store(@Valid @ModelAttribute("videogame") VideoGame formVideoGame,
+            BindingResult bidingResult,
+            Model model) {
+        if (bidingResult.hasErrors()) {
+            model.addAttribute("consoles", consoleRepository.findAll());
+            return "videogame/create";
+        }
+
+        videoGameService.create(formVideoGame);
+
+        return "redirect:/videogame";
+    }
 }
