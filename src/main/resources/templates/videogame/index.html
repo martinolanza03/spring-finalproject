@@ -8,8 +8,10 @@
 
 <body>
     <h1>Lista dei Videogiochi</h1>
+    <h2>
+        <a th:href="@{/videogame/create}">Crea Videogioco</a>
+    </h2>
 
-    <!-- Tabella se ci sono videogiochi -->
     <table th:if="${videogames != null and !videogames.empty}">
         <thead>
             <tr>
