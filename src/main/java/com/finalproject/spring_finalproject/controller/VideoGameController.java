@@ -57,7 +57,7 @@ public class VideoGameController {
             Model model) {
         if (bidingResult.hasErrors()) {
             model.addAttribute("consoles", consoleRepository.findAll());
-            return "videogame/create";
+            return "videogame/create-or-edit";
         }
 
         videoGameService.create(formVideoGame);
@@ -68,6 +68,7 @@ public class VideoGameController {
     @GetMapping("/{id}/edit")
     public String edit(@PathVariable Integer id, Model model) {
         model.addAttribute("videogame", videoGameService.findById(id).get());
+        model.addAttribute("consoles", consoleRepository.findAll());
         model.addAttribute("edit", true);
 
         return "videogame/create-or-edit";
