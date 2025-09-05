@@ -9,10 +9,11 @@
 <body>
     <h1>Lista dei Videogiochi</h1>
     <h2>
-        <a th:href="@{/videogame/create}">Crea Videogioco</a>
+        <a th:href="@{/videogame/create}" sec:authorize=" hasAuthority('ADMIN')">Crea Videogioco</a>
     </h2>
+    <h3 th:text="'Ciao' + ${username}" />
 
-    <table th:if="${videogames != null and !videogames.empty}">
+    <table th:if=" ${videogames !=null and !videogames.empty}">
         <thead>
             <tr>
                 <th>Nome</th>
@@ -28,15 +29,23 @@
                 <td>[[*{price}]]€</td>
                 <td>
                     <a th:href="@{/videogame/{id}(id=${videogame.id})}">Dettagli</a>
-                    <a th:href="@{/videogame/{id}/edit(id=${videogame.id})}">Modifica Videogame</a>
+                    <a th:href="@{/videogame/{id}/edit(id=${videogame.id})}"
+                        sec:authorize=" hasAuthority('ADMIN')">Modifica Videogame</a>
 
-                    <form action="#" th:action="@{'/videogame/{id}/delete'(id=${videogame.id})}" method="post">
-                        <button type="submit" id="submitButton">Elimina Videogame</button>
+                    <form action="#" th:action="@{'/videogame/{id}/delete'(id=${videogame.id})}" method="post"
+                        sec:authorize=" hasAuthority('ADMIN')">
+                        <button type=" submit" id="submitButton">Elimina Videogame</button>
                     </form>
                 </td>
             </tr>
         </tbody>
     </table>
+
+    <div>
+        Logged user: <span sec:authentication="name"></span>
+        Roles: <span sec:authentication="principal.authorities"></span>
+        <a href="/logout">Sign out</a>
+    </div>
 
     <p th:if="${videogames == null or videogames.empty}" th:text="'No videogames available'"></p>
 
