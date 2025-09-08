@@ -49,4 +49,15 @@ public class VideoGameRestController {
         return new ResponseEntity<VideoGame>(videoGameService.create(videoGame), HttpStatus.OK);
     }
 
+    @PutMapping("{id}")
+    public ResponseEntity<VideoGame> update(@RequestBody VideoGame videogame, @Valid @PathVariable Integer id) {
+        if (videoGameService.findById(id).isEmpty()) {
+            return new ResponseEntity<VideoGame>(HttpStatus.NOT_FOUND);
+        }
+
+        videogame.setId(id);
+
+        return new ResponseEntity<VideoGame>(videoGameService.update(videogame), HttpStatus.OK);
+    }
+
 }
