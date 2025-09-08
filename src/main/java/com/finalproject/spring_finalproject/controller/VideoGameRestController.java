@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -58,6 +59,16 @@ public class VideoGameRestController {
         videogame.setId(id);
 
         return new ResponseEntity<VideoGame>(videoGameService.update(videogame), HttpStatus.OK);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<VideoGame> delete(@Valid @PathVariable Integer id) {
+        if (videoGameService.findById(id).isEmpty()) {
+            return new ResponseEntity<VideoGame>(HttpStatus.NOT_FOUND);
+        }
+
+        videoGameService.deleteById(id);
+        return new ResponseEntity<VideoGame>(HttpStatus.OK);
     }
 
 }
