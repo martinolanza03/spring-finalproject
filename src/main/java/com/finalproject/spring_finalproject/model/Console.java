@@ -3,6 +3,8 @@ package com.finalproject.spring_finalproject.model;
 import java.sql.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,6 +26,7 @@ public class Console {
     private Date releaseDate;
 
     @ManyToMany(mappedBy = "consoles")
+    @JsonIgnore
     private List<VideoGame> videogame;
 
     public Console() {
