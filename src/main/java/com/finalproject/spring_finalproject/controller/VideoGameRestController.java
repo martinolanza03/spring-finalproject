@@ -44,4 +44,9 @@ public class VideoGameRestController {
         return new ResponseEntity<VideoGame>(videoGameAttempt.get(), HttpStatus.OK);
     }
 
+    @PostMapping
+    public ResponseEntity<VideoGame> store(@RequestBody VideoGame videoGame) {
+        return new ResponseEntity<VideoGame>(videoGameService.create(videoGame), HttpStatus.OK);
+    }
+
 }
